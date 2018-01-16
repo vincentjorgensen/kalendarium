@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import datetime
+
+a2r = [[5000000, '?'+'\u0304'],[1000000, 'M'+'\u0304'],[500000, 'D'+'\u0304'], [100000, 'C'+'\u0304'],
+       [50000, 'L'+'\u0304'], [10000, 'X'+'\u0304'], [5000, 'V'+'\u0304'],
+       [1000, 'M', 'I'+'\u0304'], [500, 'D'], [100, 'C'], [50, 'L'], [10, 'X'],
+       [5, 'V'], [1, 'I']]
+def a_to_r(num):
+  if num != 0:
+    for index, base in enumerate(a2r):
+      if num//base[0] > 0:
+        l=num//base[0]
+        offset=(1 if '5' in str(base[0]) else 0)
+        if num >= a2r[index-1][0] - a2r[index+offset][0]:
+          return (a2r[index+offset][2] if 4000 <= num < 10000 else a2r[index+offset][1]) + a2r[index-1][1] + a_to_r((num-(a2r[index-1][0] - a2r[index+offset][0]))%base[0])
+        else:
+          return l*base[1]+a_to_r((num-a2r[index-1][0])%base[0])
+  return ''
+  
+gtr_mo={}
+gtr_mo['1'] = { 'long': 'Ianuarius',  'minim': 'Ian',  'nones': 5, 'ides': 13, 'finis': 31}
+gtr_mo['2'] = { 'long': 'Februarius', 'minim': 'Feb',  'nones': 5, 'ides': 13, 'finis': 28}
+gtr_mo['3'] = { 'long': 'Martius',    'minim': 'Mart', 'nones': 7, 'ides': 15, 'finis': 31}
+gtr_mo['4'] = { 'long': 'Aprilis',    'minim': 'Apr',  'nones': 5, 'ides': 13, 'finis': 30}
+gtr_mo['5'] = { 'long': 'Maius',      'minim': 'Mai',  'nones': 7, 'ides': 15, 'finis': 31}
+gtr_mo['6'] = { 'long': 'Iunius',     'minim': 'Iun',  'nones': 5, 'ides': 13, 'finis': 30}
+gtr_mo['7'] = { 'long': 'Iulius',     'minim': 'Iul',  'nones': 7, 'ides': 15, 'finis': 31}
+gtr_mo['8'] = { 'long': 'Augustus',   'minim': 'Aug',  'nones': 5, 'ides': 13, 'finis': 31}
+gtr_mo['9'] = { 'long': 'September',  'minim': 'Sept', 'nones': 5, 'ides': 13, 'finis': 30}
+gtr_mo['10'] = { 'long': 'October',   'minim': 'Oct',  'nones': 7, 'ides': 15, 'finis': 31}
+gtr_mo['11'] = { 'long': 'Nouember',  'minim': 'Nou',  'nones': 5, 'ides': 13, 'finis': 30}
+gtr_mo['12'] = { 'long': 'December',  'minim': 'Dec',  'nones': 5, 'ides': 13, 'finis': 31}
+gtr_mo['13'] = gtr_mo['1']
+
+dt = datetime.datetime.now()
+
+gry=dt.year
+grd=dt.day
+grm=dt.month
+
+fm_date_str=''
+
+if grd == 1:
+  fm_date_str = 'Kal '+gtr_mo[str(grm)]['minim']
+elif grd < gtr_mo[str(grm)]['nones']:
+  if gtr_mo[str(grm)]['nones'] - grd < 2:
+    fm_date_str = 'pr Non '+gtr_mo[str(grm)]['minim']
+  else:
+    fm_date_str = 'a d '+a_to_r(str(1+gtr_mo[str(grm)]['nones']-grd))+' Non '+gtr_mo[str(grm)]['minim']
+elif grd == gtr_mo[str(grm)]['nones']:
+  fm_date_str = 'Nonae '+gtr_mo[str(grm)]['minim']
+elif grd < gtr_mo[str(grm)]['ides']:
+  if gtr_mo[str(grm)]['ides'] - grd < 2:
+    fm_date_str = 'pr Id '+gtr_mo[str(grm)]['minim']
+  else:
+    fm_date_str  = 'a d '
+    fm_date_str += a_to_r(str(1+gtr_mo[str(grm)]['ides']-grd))
+    fm_date_str += ' Id '
+    fm_date_str += gtr_mo[str(grm)]['minim']
+elif grd == gtr_mo[str(grm)]['ides']:
+  fm_date_str = 'Idus '+gtr_mo[str(grm)]['minim']
+else:
+  if gtr_mo[str(grm)]['finis'] - grd < 1:
+    fm_date_str = 'pr Kal '+gtr_mo[str(grm+1)]['minim']
+  else:
+    fm_date_str = 'a d '+a_to_r(2+gtr_mo[str(grm)]['finis']-grd)+' Kal '+gtr_mo[str(grm+1)]['minim']
+
+print(fm_date_str)
+
