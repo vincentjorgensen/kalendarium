@@ -1,0 +1,20 @@
+[package]
+name = "kalendarium"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0"
+authors = ["Vincent Jorgensen [vincentjorgensen@tutanota.com"]
+repository = "" # TODO
+description = "A library for converting very large numbers to Roman numerals and formatting the date in the Roman Kalendarium"
+documentation = "" # TODO
+readme = "README.md" # TODO
+keywords = ["roman", "numerals", "arabic", "convert"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "~0.4.24"
+
+[[bin]]
+name = "kalendarium"
+path = "main.rs"
