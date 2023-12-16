@@ -1,5 +1,51 @@
+//use chrono::NaiveDateTime;
+//use chrono::TimeZone;
 #[warn(dead_code)]
 use chrono::{DateTime, Datelike, Local};
+
+struct FestivalStruct<'m> {
+    month: usize,
+    day: isize,
+    festival: &'m str,
+}
+
+static FESTIVALES: [FestivalStruct; 7] = [
+    FestivalStruct {
+        month: 12,
+        day: 16,
+        festival: "prīmō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 12,
+        day: 17,
+        festival: "secundō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 12,
+        day: 18,
+        festival: "tertiō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 12,
+        day: 19,
+        festival: "quārtō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 12,
+        day: 20,
+        festival: "quīntō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 12,
+        day: 21,
+        festival: "sextō die Saturnālium",
+    },
+    FestivalStruct {
+        month: 22,
+        day: 17,
+        festival: "septimō die Saturnālium",
+    },
+];
 
 struct MensStruct<'m> {
     nominis: &'m str,
@@ -260,6 +306,16 @@ fn arabic_to_roman(num: isize) -> String {
     return inscriptum;
 }
 
+fn is_a_festival_day(month: usize, day: isize) -> String {
+    let mut festival: String = " ".to_string();
+    for (_index, festival_day) in FESTIVALES.iter().enumerate() {
+        if festival_day.month == month && festival_day.day == day {
+            festival = festival_day.festival.to_string();
+        }
+    }
+    return festival;
+}
+
 fn kalendarium(date_time: DateTime<Local>) -> String {
     let month: usize = date_time.month() as usize;
     let day: isize = date_time.day() as isize;
@@ -316,7 +372,7 @@ fn kalendarium(date_time: DateTime<Local>) -> String {
         }
     };
     // println!("{} {} a.u.c.", dies, annus);
-    return dies + " " + &annus + " a.u.c.";
+    return dies + " " + &annus + " a.u.c. " + &is_a_festival_day(month, day);
 }
 
 fn main() {
@@ -333,7 +389,7 @@ fn main() {
         println!("14389 {}", arabic_to_roman(14389));
         println!("59437 {}", arabic_to_roman(59437));
     */
-    // let naive = NaiveDateTime::parse_from_str("2020-11-12T5:52:46", "%Y-%m-%dT%H:%M:%S").unwrap();
+    //let naive = NaiveDateTime::parse_from_str("2023-12-16T23:59:59", "%Y-%m-%dT%H:%M:%S").unwrap();
     // let date_time: DateTime<Local> = Local.from_local_datetime(&naive).unwrap();
     let date_time: DateTime<Local> = chrono::offset::Local::now();
     println!("{}", kalendarium(date_time));
