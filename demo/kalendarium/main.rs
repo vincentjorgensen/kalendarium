@@ -9,46 +9,46 @@ struct FeriaStruct<'m> {
     festival: &'m str,
 }
 
-static FERIAE: [FeriaStruct; 11] = [
+static FERIAE: [FeriaStruct; 13] = [
     FeriaStruct {
         month: 12,
         day: 17,
-        festival: "prīmō diē Saturnālium",
+        festival: "prīmus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 18,
-        festival: "secundō diē Saturnālium",
+        festival: "secundus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 19,
-        festival: "tertiō diē Saturnālium",
+        festival: "tertius diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 20,
-        festival: "quārtō diē Saturnālium",
+        festival: "quārtus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 21,
-        festival: "quīntō diē Saturnālium",
+        festival: "quīntus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 22,
-        festival: "sextō diē Saturnālium",
+        festival: "sextus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 23,
-        festival: "septimō diē Saturnālium",
+        festival: "septimus diēs Saturnālium",
     },
     FeriaStruct {
         month: 12,
         day: 25,
-        festival: "Dīes Natalis Solis Invictī",
+        festival: "Dīēs Nātālis Sōlis Invictī",
     },
     FeriaStruct {
         month: 2,
@@ -58,12 +58,22 @@ static FERIAE: [FeriaStruct; 11] = [
     FeriaStruct {
         month: 3,
         day: 17,
-        festival: "Liberālia",
+        festival: "Līberālia",
+    },
+    FeriaStruct {
+        month: 4,
+        day: 1,
+        festival: "Venerālia",
+    },
+    FeriaStruct {
+        month: 4,
+        day: 27,
+        festival: "Flōrālia",
     },
     FeriaStruct {
         month: 6,
         day: 24,
-        festival: "Fors Fortuna",
+        festival: "Fors Fortūna",
     },
 ];
 
@@ -331,6 +341,7 @@ fn is_a_festival_day(month: usize, day: isize) -> String {
     for (_index, festival_day) in FERIAE.iter().enumerate() {
         if festival_day.month == month && festival_day.day == day {
             festival = festival_day.festival.to_string();
+            break;
         }
     }
     return festival;
