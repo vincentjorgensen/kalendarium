@@ -3,47 +3,67 @@
 #[warn(dead_code)]
 use chrono::{DateTime, Datelike, Local};
 
-struct FestivalStruct<'m> {
+struct FeriaStruct<'m> {
     month: usize,
     day: isize,
     festival: &'m str,
 }
 
-static FESTIVALES: [FestivalStruct; 7] = [
-    FestivalStruct {
-        month: 12,
-        day: 16,
-        festival: "prīmō die Saturnālium",
-    },
-    FestivalStruct {
+static FERIAE: [FeriaStruct; 11] = [
+    FeriaStruct {
         month: 12,
         day: 17,
-        festival: "secundō die Saturnālium",
+        festival: "prīmō diē Saturnālium",
     },
-    FestivalStruct {
+    FeriaStruct {
         month: 12,
         day: 18,
-        festival: "tertiō die Saturnālium",
+        festival: "secundō diē Saturnālium",
     },
-    FestivalStruct {
+    FeriaStruct {
         month: 12,
         day: 19,
-        festival: "quārtō die Saturnālium",
+        festival: "tertiō diē Saturnālium",
     },
-    FestivalStruct {
+    FeriaStruct {
         month: 12,
         day: 20,
-        festival: "quīntō die Saturnālium",
+        festival: "quārtō diē Saturnālium",
     },
-    FestivalStruct {
+    FeriaStruct {
         month: 12,
         day: 21,
-        festival: "sextō die Saturnālium",
+        festival: "quīntō diē Saturnālium",
     },
-    FestivalStruct {
-        month: 22,
+    FeriaStruct {
+        month: 12,
+        day: 22,
+        festival: "sextō diē Saturnālium",
+    },
+    FeriaStruct {
+        month: 12,
+        day: 23,
+        festival: "septimō diē Saturnālium",
+    },
+    FeriaStruct {
+        month: 12,
+        day: 25,
+        festival: "Dīes Natalis Solis Invictī",
+    },
+    FeriaStruct {
+        month: 2,
+        day: 15,
+        festival: "Lupercālia",
+    },
+    FeriaStruct {
+        month: 3,
         day: 17,
-        festival: "septimō die Saturnālium",
+        festival: "Liberālia",
+    },
+    FeriaStruct {
+        month: 6,
+        day: 24,
+        festival: "Fors Fortuna",
     },
 ];
 
@@ -308,7 +328,7 @@ fn arabic_to_roman(num: isize) -> String {
 
 fn is_a_festival_day(month: usize, day: isize) -> String {
     let mut festival: String = " ".to_string();
-    for (_index, festival_day) in FESTIVALES.iter().enumerate() {
+    for (_index, festival_day) in FERIAE.iter().enumerate() {
         if festival_day.month == month && festival_day.day == day {
             festival = festival_day.festival.to_string();
         }
