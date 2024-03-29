@@ -1,5 +1,5 @@
-//use chrono::NaiveDateTime;
-//use chrono::TimeZone;
+// use chrono::NaiveDateTime;
+// use chrono::TimeZone;
 #[warn(dead_code)]
 use chrono::{DateTime, Datelike, Local};
 
@@ -349,10 +349,18 @@ fn is_a_festival_day(month: usize, day: isize) -> String {
 
 fn kalendarium(date_time: DateTime<Local>) -> String {
     let month: usize = date_time.month() as usize;
+    println!("month {}", month);
     let day: isize = date_time.day() as isize;
+    println!("day {}", day);
     let year: isize = date_time.year() as isize;
+    println!("year {}", year);
 
-    let leap_day: isize = if day > 25 { 1 } else { 0 };
+    let leap_day: isize = if is_leap_year(year) && day > 25 && month == 2 {
+        1
+    } else {
+        0
+    };
+    println!("leap_day {}", leap_day);
 
     let annus: String;
     annus = if year < 0 {
@@ -394,7 +402,7 @@ fn kalendarium(date_time: DateTime<Local>) -> String {
         if is_leap_year(year) && day == 25 {
             "ante diem bis VI Kal. Mart.".to_owned()
         } else if (MENSES[month - 1].finis + leap_day) - day < 2 {
-            "prīdiē Kalendae {}".to_owned() + MENSES[month].nomines
+            "prīdiē Kalendae ".to_owned() + MENSES[month].nomines
         } else {
             "ante diem ".to_owned()
                 + &arabic_to_roman((2 + (MENSES[month - 1].finis + leap_day) - day) as isize)
@@ -420,8 +428,9 @@ fn main() {
         println!("14389 {}", arabic_to_roman(14389));
         println!("59437 {}", arabic_to_roman(59437));
     */
-    //let naive = NaiveDateTime::parse_from_str("2023-12-16T23:59:59", "%Y-%m-%dT%H:%M:%S").unwrap();
-    // let date_time: DateTime<Local> = Local.from_local_datetime(&naive).unwrap();
+    //    let naive = NaiveDateTime::parse_from_str("2024-02-29T23:59:59", "%Y-%m-%dT%H:%M:%S").unwrap();
+    //    let date_time: DateTime<Local> = Local.from_local_datetime(&naive).unwrap();
     let date_time: DateTime<Local> = chrono::offset::Local::now();
+    println!("{}", date_time);
     println!("{}", kalendarium(date_time));
 }
