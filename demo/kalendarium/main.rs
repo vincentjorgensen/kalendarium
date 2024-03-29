@@ -349,19 +349,20 @@ fn is_a_festival_day(month: usize, day: isize) -> String {
 
 fn kalendarium(date_time: DateTime<Local>) -> String {
     let month: usize = date_time.month() as usize;
-    println!("month {}", month);
     let day: isize = date_time.day() as isize;
-    println!("day {}", day);
     let year: isize = date_time.year() as isize;
-    println!("year {}", year);
 
     let leap_day: isize = if is_leap_year(year) && day > 25 && month == 2 {
         1
     } else {
         0
     };
-    println!("leap_day {}", leap_day);
-
+    /*
+        println!("month {}", month);
+        println!("day {}", day);
+        println!("year {}", year);
+        println!("leap_day {}", leap_day);
+    */
     let annus: String;
     annus = if year < 0 {
         arabic_to_roman((753 + 1 - year) as isize)
