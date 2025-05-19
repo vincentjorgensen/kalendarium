@@ -3,6 +3,34 @@
 #[warn(dead_code)]
 use chrono::{DateTime, Datelike, Local};
 
+struct DiesStruct<'m> {
+    day_of_week: &'m str,
+}
+
+static DIES: [DiesStruct; 7] = [
+    DiesStruct {
+        day_of_week: "Diēs Lunae",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Martis",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Mercurii",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Junonis",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Veneris",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Saturnis",
+    },
+    DiesStruct {
+        day_of_week: "Diēs Solis",
+    },
+];
+
 struct FeriaStruct<'m> {
     month: usize,
     day: isize,
@@ -272,6 +300,10 @@ static NUMERI: [Arabic2RomanStruct; 14] = [
     },
 ];
 
+fn semana(day_num: usize) -> String {
+    return "".to_owned() + DIES[day_num].day_of_week;
+}
+
 fn itera(repeat: isize, numeral: &str) -> String {
     return if repeat > 0 {
         numeral.to_owned() + &itera(repeat - 1, numeral)
@@ -351,6 +383,7 @@ fn kalendarium(date_time: DateTime<Local>) -> String {
     let month: usize = date_time.month() as usize;
     let day: isize = date_time.day() as isize;
     let year: isize = date_time.year() as isize;
+    let day_of_week: usize = date_time.weekday() as usize;
 
     let leap_day: isize = if is_leap_year(year) && day > 25 && month == 2 {
         1
@@ -363,6 +396,9 @@ fn kalendarium(date_time: DateTime<Local>) -> String {
         println!("year {}", year);
         println!("leap_day {}", leap_day);
     */
+    let dies_semana: String;
+    dies_semana = semana(day_of_week);
+
     let annus: String;
     annus = if year < 0 {
         arabic_to_roman((753 + 1 - year) as isize)
@@ -412,7 +448,7 @@ fn kalendarium(date_time: DateTime<Local>) -> String {
         }
     };
     // println!("{} {} a.u.c.", dies, annus);
-    return dies + " " + &annus + " a.u.c. " + &is_a_festival_day(month, day);
+    return dies + " " + &annus + " a.u.c. " + &is_a_festival_day(month, day) + &dies_semana;
 }
 
 fn main() {
