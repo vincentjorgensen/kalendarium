@@ -1,0 +1,20 @@
+[package]
+name = "kalendarium"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.87.0"
+license = "GPL-3.0"
+authors = ["Vincent Jorgensen [vincent.jorgensen@gmail.com"]
+homepage = "https://codeberg.org/utricularius"
+repository = "https://codeberg.org/utricularius/kalendarium"
+description = "A library for converting Arabic numerals into Roman numerals and modern dates into the Kalendarium Romanum"
+readme = "README.md"
+keywords = ["ancient", "roman", "numerals", "arabic", "convert", "calendar", "kalendarium"]
+
+[dependencies]
+julian = "0.7.0"
+
+[features]
+default = ["std"]
+std = []
+
