@@ -9,25 +9,25 @@ struct DiesStruct<'m> {
 
 static DIES: [DiesStruct; 7] = [
     DiesStruct {
-        day_of_week: "Diēs Lunae",
+        day_of_week: "diēs Lūnae",
     },
     DiesStruct {
-        day_of_week: "Diēs Martis",
+        day_of_week: "diēs Mārtis",
     },
     DiesStruct {
-        day_of_week: "Diēs Mercurii",
+        day_of_week: "diēs Mercuriī",
     },
     DiesStruct {
-        day_of_week: "Diēs Junonis",
+        day_of_week: "diēs Jovis",
     },
     DiesStruct {
-        day_of_week: "Diēs Veneris",
+        day_of_week: "diēs Veneris",
     },
     DiesStruct {
-        day_of_week: "Diēs Saturnis",
+        day_of_week: "diēs Sāturnī",
     },
     DiesStruct {
-        day_of_week: "Diēs Solis",
+        day_of_week: "diēs Sōlis",
     },
 ];
 

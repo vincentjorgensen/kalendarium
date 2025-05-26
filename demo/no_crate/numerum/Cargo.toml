@@ -1,0 +1,15 @@
+[package]
+name = "numerum"
+version = "0.1.0"
+edition = "2024"
+license = "GPL-3.0"
+authors = ["Vincent Jorgensen [vincentjorgensen@tutanota.com"]
+description = "A library for converting very large numbers to Roman numerals"
+keywords = ["roman", "numerals", "arabic", "convert"]
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+
+[[bin]]
+name = "numerum"
+path = "main.rs"

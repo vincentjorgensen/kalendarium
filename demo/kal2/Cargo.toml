@@ -1,0 +1,19 @@
+[package]
+name = "kal"
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.87.0"
+license = "GPL-3.0"
+authors = ["Vincent Jorgensen [vincent.jorgensen@gmail.com"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.38", features = ["derive"] }
+kalendarium = { version = "0.1.0", path = "../../rust" }
+chrono = "0.4.41"
+
+[[bin]]
+name = "kal2"
+path = "main.rs"
+

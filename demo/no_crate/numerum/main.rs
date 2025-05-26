@@ -1,3 +1,19 @@
+// use chrono::NaiveDateTime;
+// use chrono::TimeZone;
+#[warn(dead_code)]
+use clap::Parser;
+
+#[derive(Parser)]
+struct Cli {
+    number: isize,
+}
+
+struct Arabic2RomanStruct<'a> {
+    tabulatus: isize,
+    romanum: &'a str,
+    romanum_duo: Option<&'a str>,
+}
+
 static NUMERI: [Arabic2RomanStruct; 14] = [
     Arabic2RomanStruct {
         tabulatus: 5000000,
@@ -79,23 +95,7 @@ fn itera(repeat: isize, numeral: &str) -> String {
     };
 }
 
-fn is_leap_year(year: isize) -> bool {
-    if year % 4 == 0 {
-        if (year % 100) == 0 {
-            if year % 400 == 0 {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    } else {
-        return false;
-    }
-}
-
-pub fn ad_romanum(num: isize) -> String {
+fn arabic_to_roman(num: isize) -> String {
     let mut inscriptum: String = "".to_string();
     if num != 0 {
         for (index, basis) in NUMERI.iter().enumerate() {
@@ -117,14 +117,14 @@ pub fn ad_romanum(num: isize) -> String {
                         })
                         .to_string()
                             + NUMERI[index - 1].romanum
-                            + &ad_romanum(
+                            + &arabic_to_roman(
                                 (num - (NUMERI[index - 1].tabulatus
                                     - NUMERI[index + offset].tabulatus))
                                     % basis.tabulatus,
                             )
                     } else {
                         itera(tabulatus, basis.romanum).to_owned()
-                            + &ad_romanum(
+                            + &arabic_to_roman(
                                 (num - NUMERI[index - 1].tabulatus).rem_euclid(basis.tabulatus),
                             )
                     };
@@ -133,4 +133,9 @@ pub fn ad_romanum(num: isize) -> String {
         }
     }
     return inscriptum;
+}
+
+fn main() {
+    let args = Cli::parse();
+    println!("{}", arabic_to_roman(args.number))
 }

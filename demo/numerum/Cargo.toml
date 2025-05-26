@@ -1,0 +1,17 @@
+[package]
+name = "numerum"
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.87.0"
+license = "GPL-3.0"
+authors = ["Vincent Jorgensen [vincentjorgensen@tutanota.com"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+kalendarium = { version = "0.1.0", path = "../../rust" }
+
+[[bin]]
+name = "numerum"
+path = "main.rs"
