@@ -9,7 +9,7 @@ homepage = "https://codeberg.org/utricularius"
 repository = "https://codeberg.org/utricularius/kalendarium"
 description = "A library for converting Arabic numerals into Roman numerals and modern dates into the Kalendarium Romanum"
 readme = "README.md"
-keywords = ["ancient", "roman", "numerals", "arabic", "convert", "calendar", "kalendarium"]
+keywords = ["roman", "numerals", "arabic", "convert", "calendar"]
 
 [dependencies]
 julian = "0.7.0"
