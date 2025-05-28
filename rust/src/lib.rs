@@ -29,7 +29,7 @@ pub const MIN: u32 = 0;
 /// The value of the largest Roman numeral
 pub const MAX: u32 = 4_999_999;
 
-/// [`Result`](std::result::Result) with error defaulted to [`xvii::Error`](Error)
+/// [`Result`](std::result::Result) with error defaulted to [`kalendarium::OutOfRangeError`](Error)
 pub type Result<T, E = OutOfRangeError> = core::result::Result<T, E>;
 
 #[cfg(test)]
