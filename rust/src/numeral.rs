@@ -36,8 +36,8 @@ impl RomanNumeral {
     ///
     /// .. code-block:: rust
     ///
-    //     let answer: RomanNumeral = RomanNumeral::new(42).unwrap();
-    //     assert_eq!("XLII", answer.to_uppercase());
+    ///    let answer: RomanNumeral = RomanNumeral::new(42).unwrap();
+    ///    assert_eq!("XLII", answer.to_uppercase());
     ///
     pub const fn new(value: u32) -> Result<Self, OutOfRangeError> {
         if value <= 4_999_999 {
